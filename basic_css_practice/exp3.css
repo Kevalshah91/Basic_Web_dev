@@ -1,0 +1,69 @@
+body{
+    font-family: Roboto;
+}
+.container-fluid{
+    background-color: #08104e;
+    padding-top: 0px;
+    color: white;
+
+}
+.navbar{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+
+}
+
+
+.collapse{
+    margin-left: 48vw;
+    padding-bottom: 0px;
+}
+.nav-item{
+    margin-left: 2vw;
+}
+.mid-text{
+    width: 100VW;
+    height: 25vw;
+    background-color: #08104e;
+    margin-top: 0px;
+    padding-left: 7vw;
+    padding-top: 5vw;
+}
+.mid-text h5{
+    color: white;
+    font-size: 24px;
+
+}
+.mid-text p{
+    color: white ;
+    padding-top: 2vw;
+    font-size: 14px;    
+    padding-left: 3vw;
+}
+.btn{
+    background: whitesmoke;
+    color: black;
+    width: 8vw;
+    margin-left: 12vw;
+    margin-top: 2vw;
+}
+h3{
+    text-align: center;
+    padding-top: 2vw;   
+}
+
+.d-flex{
+    margin-left:2vw;
+    margin-top: 8vw;
+    gap: 6vw;
+}
+.p-2 h5{
+    font-size: 24px;
+    
+}
+
+.p-2 p{
+    padding-top: 2vw;
+    font-weight: 500px;
+}
