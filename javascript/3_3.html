@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Form Validation</title>
+  </head>
+  <body>
+    </form>
+        <table border="1">
+            <form id="myForm" action="#" method="post" novalidate>
+            <tr>
+                <td><label for="name">Name:</label></td>
+                <td><input type="text" id="name" name="name" required /></td>
+            </tr>
+            <tr>
+                <td><label for="email">Email:</label></td>
+                <td><input type="email" id="email" name="email" required /></td>
+            </tr>
+            <tr>
+                <td><label for="zipcode">Zip Code:</label></td>
+                <td><input type="text" id="zipcode" name="zipcode" required /></td>
+            </tr>
+            <tr>
+                <td><label for="country">Country:</label></td>
+                <td><input type="text" id="country" name="country" required /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button type="submit">Submit</button>   </td>
+            </tr>
+        </form>
+        </table>
+       
+    <script>
+      document
+        .getElementById("myForm")
+        .addEventListener("submit", function (event) {
+          var name = document.getElementById("name").value;
+          var email = document.getElementById("email").value;
+          var zipcode = document.getElementById("zipcode").value;
+          var country = document.getElementById("country").value;
+          var valid = true;
+
+          if (name.trim() === "") {
+            alert("Name cannot be empty.");
+            valid = false;
+          }
+
+          if (!isValidEmail(email)) {
+            alert("Invalid email address.");
+            valid = false;
+          }
+
+          if (zipcode.trim() === "") {
+            alert("Zip Code cannot be empty.");
+            valid = false;
+          }
+
+          if (country.trim() === "") {
+            alert("Country cannot be empty.");
+            valid = false;
+          }
+
+          if (!valid) {
+            event.preventDefault();
+          }
+          if (valid) {
+            alert("Form submitted");
+          }
+        });
+
+      function isValidEmail(email) {
+        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        return emailPattern.test(email);
+      }
+    </script>
+  </body>
+</html>
+
+<!-- <body>
+    <form id="myForm" action="#" method="post" novalidate>
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+      <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div>
+        <label for="zipcode">Zip Code:</label>
+        <input type="text" id="zipcode" name="zipcode" required />
+      </div>
+      <div>
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" required />
+      </div>
+      <button type="submit">Submit</button>
+    </form> -->

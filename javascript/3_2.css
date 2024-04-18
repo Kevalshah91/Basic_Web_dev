@@ -1,0 +1,113 @@
+html,body{
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+	font-family: 'Noto Serif', serif;
+}
+*{box-sizing:border-box;font: bold 14px Arial, sans-serif;}
+
+h1{
+	font-size:40px;
+	text-align:center;
+	margin-bottom:110px;
+	background:white;
+	color:white;
+	margin-top:0;
+	padding:20px;
+	
+}
+
+.main-div{
+	 width:290px;
+	 margin:0 auto;
+	 background:rgb(31, 27, 27);
+	 height:310px;
+	 box-shadow:2px 2px 2px gray;
+	 padding:15px;
+     border-radius:4px;	
+    position:relative;	 
+}
+
+.screen-div,.number-div{
+	  padding:0;
+	  margin:0;
+}
+
+.screen{
+	list-style:none;
+	color:black;
+	font-weight: 200;
+	height:45px;
+    margin-left:8px;
+	border-radius:4px;
+	text-align:center;
+	font-weight:bold;
+	font-family: 'Ubuntu', sans-serif;
+	margin-bottom:8px;
+    width:150px;
+	background:orange;
+	border: gold;
+  overflow:hidden;
+}
+
+.clear{
+    width:60px;
+	background:#e95151;
+	padding:10px 9px;
+	position:absolute;
+	border-radius:3px;
+	left:190px;
+	top:18px;
+	color:white;
+	cursor:pointer;
+	text-align:center;
+}
+.clear:hover{
+	background: pink;
+	border-bottom: 4px solid #B3232E;
+	color: white;
+}
+.screen{
+  p{
+    margin: 0;
+  }
+}
+
+.number-div .tool{
+	text-decoration: none;
+	color: black;
+	background-color: gray;
+}
+
+
+.number-div li{
+	list-style:none;
+	float:left;
+    width:52px;
+	margin:9px 5px;
+	padding:10px;
+	border-radius:5px;
+	color:orange;
+	text-align:center;
+	transition:.2s;
+	cursor:pointer;
+    border: 1px solid gold;
+	background: black;
+}
+
+.number-div li:hover{
+	background: orange;
+	color: black;
+}
+
+#equals{
+	background:#13a2f5;
+	color:white;
+}
+
+#equals:hover{
+	background: #FE5E6A;
+	border-bottom: 4px solid #B3232E;
+	color: white;
+}

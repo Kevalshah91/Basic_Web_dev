@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .is-invalid {
+            border-color: red !important;
+        }
+
+        .is-valid {
+            border-color: green !important;
+        }
+
+        .custom-error {
+            color: red;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2>Sign Up</h2>
+                <form id="signupForm" action="/" method="post" novalidate>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                        <div class="custom-error" id="usernameError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                        <div class="custom-error" id="emailError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" name="password" required>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" id="togglePassword">Show</button>
+                            </div>
+                        </div>
+                        <div class="custom-error" id="passwordError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" id="toggleConfirmPassword">Show</button>
+                            </div>
+                        </div>
+                        <div class="custom-error" id="confirmPasswordError"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#signupForm').submit(function (event) {
+                var password = $('#password').val();
+                var confirmPassword = $('#confirmPassword').val();
+                var username = $('#username').val();
+                var email = $('#email').val();
+                var valid = true; 
+
+                $('.form-control').removeClass('is-invalid is-valid');
+                $('.custom-error').text('');
+
+                if (password !== confirmPassword) {
+                    $('#passwordError').text('Passwords do not match.');
+                    $('#password').addClass('is-invalid');
+                    $('#confirmPassword').addClass('is-invalid');
+                    valid = false;
+                } else {
+                    if (password.trim() !== '') {
+                        $('#password').addClass('is-valid');
+                        $('#confirmPassword').addClass('is-valid');
+                    }
+                }
+
+                if (username.trim() === '') {
+                    $('#usernameError').text('Please enter a username.');
+                    $('#username').addClass('is-invalid');
+                    valid = false;
+                } else {
+                    $('#username').addClass('is-valid');
+                }
+
+                if (!isValidEmail(email)) {
+                    $('#emailError').text('Please enter a valid email address.');
+                    $('#email').addClass('is-invalid');
+                    valid = false;
+                } else {
+                    $('#email').addClass('is-valid');
+                }
+
+                if (!isStrongPassword(password)) {
+                    $('#passwordError').text('Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.');
+                    $('#password').addClass('is-invalid');
+                    valid = false;
+                }
+
+                if (!valid) {
+                    event.preventDefault();
+                }
+            });
+
+            function isValidEmail(email) {
+                var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                return emailPattern.test(email);
+            }
+
+            function isStrongPassword(password) {
+
+                var passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&!*])[A-Za-z\d@#$%^&!*]{8,}$/;
+                return passwordPattern.test(password);
+            }
+
+
+            $('#togglePassword').click(function () {
+                var passwordInput = $('#password');
+                var type = passwordInput.attr('type') === 'password' ? 'text' : 'password';
+                passwordInput.attr('type', type);
+                $(this).text(type === 'password' ? 'Show' : 'Hide');
+            });
+
+            $('#toggleConfirmPassword').click(function () {
+                var confirmPasswordInput = $('#confirmPassword');
+                var type = confirmPasswordInput.attr('type') === 'password' ? 'text' : 'password';
+                confirmPasswordInput.attr('type', type);
+                $(this).text(type === 'password' ? 'Show' : 'Hide');
+            });
+        });
+    </script>
+</body>
+</html>
