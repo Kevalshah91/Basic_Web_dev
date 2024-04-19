@@ -1,50 +1,68 @@
-const mongoose = require('mongoose');
-const Book = require('./book'); 
 
-const dbURI = 'mongodb://localhost:27017/apple';
-
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
-
-mongoose.connection.on('connected', () => {
-  console.log('Mongoose connected to ' + dbURI);
-
-  // Call the function to perform operations on the database
-  performDatabaseOperations();
+const express = require('express');
+const app = express();
+app.use(express.json());
+const users = [
+  { id: 1, name: 'Keval Shah' },
+  { id: 2, name: 'Virat Kolhi' },
+];
+app.get('/', (req, res) => {
+  res.send('Hello, this is the root endpoint!');
+});
+app.get('/users', (req, res) => {
+  res.json(users);
 });
 
-mongoose.connection.on('error', (err) => {
-  console.log('Mongoose connection error: ' + err);
-});
+// Get a specific user by ID
+app.get('/users/:id', (req, res) => {
+  const userId = parseInt(req.params.id);
+  const user = users.find(u => u.id === userId);
 
-mongoose.connection.on('disconnected', () => {
-  console.log('Mongoose disconnected');
-});
-
-process.on('SIGINT', () => {
-  mongoose.connection.close(() => {
-    console.log('Mongoose disconnected through app termination');
-    process.exit(0);
-  });
-});
-
-// Function to perform operations on the database
-async function performDatabaseOperations() {
-  try {
-    const books = await Book.find({});
-    console.log('All books in the database:', books);
-
-    const newBook = new Book({
-      title: 'New Book',
-      author: 'Author Name',
-      genre: 'Fiction',
-      published: new Date(),
-      ISBN: '1234567890'
-    });
-
-    const savedBook = await newBook.save();
-    console.log('Book saved to the database:', savedBook);
-
-  } catch (err) {
-    console.error(err);
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404).json({ message: 'User not found' });
   }
-}
+});
+
+// Add a new user
+app.post('/users', (req, res) => {
+  const newUser = req.body;
+  users.push(newUser);
+  res.status(201).json(newUser);
+});
+
+// Update a user by ID
+app.put('/users/:id', (req, res) => {
+  const userId = parseInt(req.params.id);
+  const updatedUser = req.body;
+  const index = users.findIndex(u => u.id === userId);
+
+  if (index !== -1) {
+    users[index] = { ...users[index], ...updatedUser };
+    res.json(users[index]);
+  } else {
+    res.status(404).json({ message: 'User not found' });
+  }
+});
+
+// Delete a user by ID
+app.delete('/users/:id', (req, res) => {
+  const userId = parseInt(req.params.id);
+  const index = users.findIndex(u => u.id === userId);
+
+  if (index !== -1) {
+    const deletedUser = users.splice(index, 1)[0];
+    res.json(deletedUser);
+  } else {
+    res.status(404).json({ message: 'User not found' });
+  }
+});
+
+// Set the port for the server to listen on
+const port = 3000;
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
